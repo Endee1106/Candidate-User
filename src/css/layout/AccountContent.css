@@ -1,0 +1,7 @@
+.header-table {
+  background-color: #ffff;
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0px 20px;
+}
