@@ -14,9 +14,6 @@ class TestApi extends BaseApi {
     getListCandidate(testId){
         return BaseApiConfig.get(`${this.apiController}/getCandidatesOfTest/${testId}`);
     }
-    getTestAssignToMe(myId){
-        return BaseApiConfig.get(`${this.apiController}/getTestAssignToMe/${myId}`)
-    }
 }
 
 export default new TestApi();
