@@ -24,7 +24,7 @@ function Header({ userName }) {
         <div className="header">
             <div className="header-left">
                 <h2>Kiểm tra đầu vào ứng viên</h2>
-                <h2 id="unitDetail"></h2>
+                <h2 id="unitDetail">{userName}</h2>
             </div>
             <div className="header-right">
                 <div className="notification">

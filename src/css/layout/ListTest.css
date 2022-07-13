@@ -1,0 +1,16 @@
+.section-list {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin: 5px;
+    
+}
+.section-list ul  {
+    border:3px solid #2F4F4F;
+    height: 50px;
+    background-color: white;
+    text-align: center;
+    align-content: flex-start;
+    margin: 6px;
+    padding-top: 10px;
+}
