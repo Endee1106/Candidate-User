@@ -8,9 +8,10 @@ function QuestionsContent() {
 
   return (
     <div className="table-account">
-      kết quả bài thi
+      <h2>Cảm ơn bạn đã tham gia bài thi</h2>
+      <h3>Kết quả thi</h3>
     </div>
   );
 }
 
-export default QuestionsContent;
+export default QuestionsContent;  
