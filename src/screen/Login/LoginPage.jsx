@@ -26,6 +26,7 @@ function LoginPage() {
           "info",
           JSON.stringify(res.data.data.infomation)
         );
+        console.log(res.data.data.infomation);
         navigate("/client/");
       })
       .catch((err) => {
@@ -47,7 +48,7 @@ function LoginPage() {
               value={inputs.username || ""}
               onChange={handleChange}
             />
-            <label htmlFor="username">Username</label>
+            {/* <label htmlFor="username">Username</label> */}
             <span class="focus-border"></span>
           </div>
           <div class="input-effect">
@@ -59,7 +60,7 @@ function LoginPage() {
               value={inputs.password || ""}
               onChange={handleChange}
             />
-            <label htmlFor="password">Password</label>
+            {/* <label htmlFor="password">Password</label> */}
             <span class="focus-border"></span>
           </div>
           <div className="center">

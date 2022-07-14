@@ -10,7 +10,10 @@ const TestScreen = () => {
   const [testResult, setTestResult] = useState({});
 
   useEffect(() => {
-    TestClientApi.getTest.then((rs) => setLsTest(rs.data.data));
+    TestClientApi.getTests.then((rs) => {
+      console.log(rs.data.data);
+      setLsTest(rs.data.data)
+    });
   }, []);
 
   const handleAnswerQs = (idQs, value) => {
@@ -45,7 +48,10 @@ const TestScreen = () => {
               <li
                 key={key}
                 onClick={() => {
-                  setCurrentTest(test);
+                  TestClientApi.getTest(test.id).then(res => {
+                    console.log(11111111111111, res);
+                    setCurrentTest(res.data.data);
+                  });
                 }}
               >
                 {test.testName}
@@ -146,6 +152,84 @@ const data = {
             id: "10004",
             contentText: "Tên bạn là gì?",
             type: 3,
+          },
+        },
+      ],
+    },
+    {
+      sectionName: "Phần thi 1",
+      questionSections: [
+        {
+          question: {
+            id: "10001",
+            contentText: "Thủ đô vn là?",
+            type: 1,
+            contentJSON: [
+              {
+                key: "Hà tĩnh",
+                value: false,
+              },
+              {
+                key: "Hà Nội",
+                value: true,
+              },
+            ],
+          },
+        },
+        {
+          question: {
+            id: "10002",
+            contentText: "Tỉnh của vn là?",
+            type: 2,
+            contentJSON: [
+              {
+                key: "Hà tĩnh",
+                value: true,
+              },
+              {
+                key: "Hà Nội",
+                value: true,
+              },
+            ],
+          },
+        },
+      ],
+    },
+    {
+      sectionName: "Phần thi 1",
+      questionSections: [
+        {
+          question: {
+            id: "10001",
+            contentText: "Thủ đô vn là?",
+            type: 1,
+            contentJSON: [
+              {
+                key: "Hà tĩnh",
+                value: false,
+              },
+              {
+                key: "Hà Nội",
+                value: true,
+              },
+            ],
+          },
+        },
+        {
+          question: {
+            id: "10002",
+            contentText: "Tỉnh của vn là?",
+            type: 2,
+            contentJSON: [
+              {
+                key: "Hà tĩnh",
+                value: true,
+              },
+              {
+                key: "Hà Nội",
+                value: true,
+              },
+            ],
           },
         },
       ],
