@@ -28,12 +28,12 @@ function Header({ userName }) {
             </div>
             <div className="header-right">
                 <div className="notification">
-                    <i className="fas fa-bell"></i>
+                    <i className="fa fa-bell"></i>
                 </div>
                 <button className="user" onClick={userInfoOnClick} onBlur={userInfoOnBlur}>
                     <div className="avatar"></div>
                     <p className="display-user">{userName}</p>
-                    <i className="fas fa-angle-down"></i>
+                    <i className="fa fa-angle-down"></i>
                 </button>
                 <div className={`list-option ${isShowOption ? 'list-option-show' : ''}`}>
                     <div className="item-option">Chỉnh sửa thông tin</div>

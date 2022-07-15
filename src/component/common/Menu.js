@@ -33,13 +33,13 @@ function Menu() {
               item.to === optionActive ? "active" : ""
             }`}
           >
-            <i className={`fas fa-${item.icon}`}></i>
+            <i className={`fa fa-${item.icon}`}></i>
             <p>{item.text}</p>
           </div>
         </Link>
       ))}
       <div className="toggle-menu">
-        <i className="fas fa-angle-left"></i>
+        <i className="fa fa-angle-left"></i>
       </div>
     </div>
   );

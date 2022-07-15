@@ -35,42 +35,51 @@ function LoginPage() {
   };
 
   return (
-    <div className="login-form">
-      <div className="login-container">
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
-          <div class="input-effect" style={{ marginBottom: "20px" }}>
-            <input
-              class="effect-16"
+    <div className="limiter">
+  <div className="container-login100">
+    <div className="wrap-login100">
+      <div className="login100-pic js-tilt" data-tilt>
+        <img src="images/img-01.png" alt="IMG" />
+      </div>
+      <form className="login100-form validate-form"  onSubmit={handleSubmit}>
+        <span className="login100-form-title">
+          CMC Corporation
+        </span>
+        <div className="wrap-input100 validate-input">
+          <input className="input100" 
               type="text"
               name="username"
               id="username"
               value={inputs.username || ""}
               onChange={handleChange}
-            />
-            {/* <label htmlFor="username">Username</label> */}
-            <span class="focus-border"></span>
-          </div>
-          <div class="input-effect">
-            <input
-              class="effect-16"
+              placeholder="Username"/>
+          <span className="focus-input100" />
+          <span className="symbol-input100">
+            <i className="fa fa-user" aria-hidden="true" />
+          </span>
+        </div>
+        <div className="wrap-input100 validate-input" data-validate="Password is required">
+          <input className="input100"  
               type="Password"
               name="password"
               id="password"
               value={inputs.password || ""}
               onChange={handleChange}
-            />
-            {/* <label htmlFor="password">Password</label> */}
-            <span class="focus-border"></span>
-          </div>
-          <div className="center">
-            <button class="custom-btn btn-3" type="submit">
-              <span>Submit</span>
-            </button>
-          </div>
-        </form>
-      </div>
+              placeholder="Password" />
+          <span className="focus-input100" />
+          <span className="symbol-input100">
+            <i className="fa fa-lock" aria-hidden="true" />
+          </span>
+        </div>
+        <div className="container-login100-form-btn">
+          <button className="login100-form-btn">
+            Login
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
+</div>
   );
 }
 
