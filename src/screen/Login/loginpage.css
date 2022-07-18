@@ -4,6 +4,8 @@
   align-items: center;
   height: 100%;
   position: relative;
+  background-color: #112D4E;
+  
 }
 
 form {
@@ -16,11 +18,11 @@ form {
 
 .login-container {
   height: 400px;
-  width: 300px;
+  width: 700px;
   border: 1px solid white;
   border-radius: 12px;
   background-color: white;
-  box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
 }
 .login-container h2{
   text-align: center;
@@ -95,14 +97,13 @@ button {
 
 
 .btn-3 {
-  background: rgb(0,172,238);
-background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
-  width: 130px;
+  background: #112D4E;
+  width: 200px;
   height: 40px;
   line-height: 42px;
   padding: 0;
   border: none;
-  
+  margin-top: 50px;
 }
 .btn-3 span {
   position: relative;
@@ -116,7 +117,7 @@ background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
   content: "";
   right: 0;
   top: 0;
-   background: rgba(2,126,251,1);
+   background: #112D4E;
   transition: all 0.3s ease;
 }
 .btn-3:before {
@@ -130,15 +131,17 @@ background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
 .btn-3:hover{
    background: transparent;
   box-shadow: none;
+  background-color: #F9F7F7;
 }
 .btn-3:hover:before {
   height: 100%;
 }
 .btn-3:hover:after {
   width: 100%;
+  
 }
 .btn-3 span:hover{
-   color: rgba(2,126,251,1);
+   color: #112D4E;
 }
 .btn-3 span:before,
 .btn-3 span:after {
@@ -146,7 +149,7 @@ background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
   content: "";
   left: 0;
   bottom: 0;
-   background: rgba(2,126,251,1);
+  background: #112D4E;
   transition: all 0.3s ease;
 }
 .btn-3 span:before {
@@ -162,4 +165,17 @@ background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
 }
 .btn-3 span:hover:after {
   width: 100%;
+}
+.user_icon{
+  position: absolute;
+  right: 100px
+}
+.image {
+  padding-left: 20px;
+  height: 400px;
+  width: 400px;
+  border-radius: 12px;
+}
+::placeholder {
+  font-size: small;
 }

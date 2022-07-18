@@ -37,38 +37,46 @@ function LoginPage() {
   return (
     <div className="login-form">
       <div className="login-container">
-        <h2>Login</h2>
+        <div className="right-login">
+          <img className="image" src="https://www.cmc.com.vn/main/imgs/logo.svg"/>
+        </div>
+        <div className="left-login">
+          <h2>Login</h2>
         <form onSubmit={handleSubmit}>
-          <div class="input-effect" style={{ marginBottom: "20px" }}>
+          <div className="input-effect" style={{ marginBottom: "20px" }}>
             <input
-              class="effect-16"
+              className="effect-16"
               type="text"
               name="username"
               id="username"
               value={inputs.username || ""}
               onChange={handleChange}
+              placeholder="Username" 
             />
             {/* <label htmlFor="username">Username</label> */}
-            <span class="focus-border"></span>
+            <span className="focus-border"></span>
           </div>
-          <div class="input-effect">
+          <div className="input-effect">
             <input
-              class="effect-16"
+              className="effect-16"
               type="Password"
               name="password"
               id="password"
               value={inputs.password || ""}
               onChange={handleChange}
+              placeholder="Password" 
             />
             {/* <label htmlFor="password">Password</label> */}
-            <span class="focus-border"></span>
+            <span className="focus-border"></span>
           </div>
           <div className="center">
-            <button class="custom-btn btn-3" type="submit">
-              <span>Submit</span>
+            <button className="custom-btn btn-3" type="submit">
+              <span>Sign in</span>
             </button>
           </div>
         </form>
+        </div>
+        
       </div>
     </div>
   );
