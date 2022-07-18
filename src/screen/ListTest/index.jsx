@@ -1,21 +1,18 @@
 import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import TestClientApi from "../../api/entities/TestClientApi";
-import Section from "./Section";
-import "./testscreen.css";
-import { useSearchParams } from "react-router-dom";
+// import "./ListTest.css";
 
-const TestScreen = (props) => {
+const ListTest = () => {
   const [lsTest, setLsTest] = useState([]);
   const [currentTest, setCurrentTest] = useState({});
   const [testResult, setTestResult] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    TestClientApi.getTest(searchParams.get("id")).then((res) => {
-      setCurrentTest(res.data.data);
-      setTestResult(res.data.data.sections);
+    TestClientApi.getTests.then((rs) => {
+      setLsTest(rs.data.data);
     });
   }, []);
 
@@ -59,40 +56,22 @@ const TestScreen = (props) => {
         className="card row"
         style={{
           margin: "12px 24px",
-          minHeight: "800px",
+          minHeight: "500px",
         }}
       >
-        <div className="card test-form" style={{ width: "100%" }}>
-          {currentTest.id && (
-            <>
-              <h1>
-                {currentTest.testName || ""}
-                <Button
-                  variant="outlined"
-                  style={{ backgroundColor: "white", float: "right" }}
-                  onClick={handleSubmitTest}
-                >
-                  Nộp bài
-                </Button>
-              </h1>
-              <div className="test-form-content">
-                {currentTest.sections.map((sec, key) => (
-                  <Section
-                    section={sec}
-                    key={key}
-                    testResult={testResult[key]}
-                    handleAnswerQs={(questionId, value) => {
-                      handleAnswerQs(key, questionId, value);
-                    }}
-                  />
-                ))}
-              </div>
-            </>
-          )}
+        <div className="list-test card" style={{ padding: 0 }}>
+          <h2>Danh sách bài thi</h2>
+          <ul>
+            {lsTest.map((test, key) => (
+              <li key={key}>
+                <Link to={`/client/test?id=${test.id}`}>{test.testName}</Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
   );
 };
 
-export default TestScreen;
+export default ListTest;
