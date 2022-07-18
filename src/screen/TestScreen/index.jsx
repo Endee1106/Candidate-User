@@ -1,4 +1,4 @@
-import { Button } from "devextreme-react";
+import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import TestClientApi from "../../api/entities/TestClientApi";
 import Section from "./Section";
@@ -7,30 +7,48 @@ import "./testscreen.css";
 const TestScreen = () => {
   const [lsTest, setLsTest] = useState([]);
   const [currentTest, setCurrentTest] = useState(data);
-  const [testResult, setTestResult] = useState({});
+  const [testResult, setTestResult] = useState(data.sections);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     TestClientApi.getTests.then((rs) => {
-      console.log(rs.data.data);
-      setLsTest(rs.data.data)
+      setLsTest(rs.data.data);
     });
   }, []);
 
-  const handleAnswerQs = (idQs, value) => {
-    let ts = { ...testResult };
-    ts[idQs] = value;
-    setTestResult(ts);
+  const handleAnswerQs = (sectionIndex, questionIndex, value) => {
+    try {
+      let ts = [...testResult];
+      ts[sectionIndex].questionSections[questionIndex].answerText = value;
+      setTestResult(ts);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const arrToObject = (arr) => {
-    let ob = {};
-    arr.forEach((ele) => {
-      ob[ele[0]] = ele[1];
-    });
-    return ob;
+  const handleSubmitTest = async () => {
+    try {
+      setIsLoading(true);
+      const userID = JSON.parse(sessionStorage.getItem("info"))?.id || "";
+      const answer = {
+        accountId: userID,
+        testAnswer: {
+          id: data.id,
+          sections: testResult,
+        },
+      };
+      let rs = await TestClientApi.submitTest(answer);
+      if (rs.status !== 200) {
+        window.alert("Something wrong");
+      } else {
+        window.alert("Gửi bài thi thành công");
+      }
+      setIsLoading(true);
+    } catch (error) {
+      window.alert("Something wrong");
+      console.log(error);
+    }
   };
-
-  console.log(testResult);
 
   return (
     <div>
@@ -48,8 +66,7 @@ const TestScreen = () => {
               <li
                 key={key}
                 onClick={() => {
-                  TestClientApi.getTest(test.id).then(res => {
-                    console.log(11111111111111, res);
+                  TestClientApi.getTest(test.id).then((res) => {
                     setCurrentTest(res.data.data);
                   });
                 }}
@@ -63,14 +80,24 @@ const TestScreen = () => {
         <div className="card md-8 test-form">
           {currentTest.id && (
             <>
-              <h2>{currentTest.testName || ""}</h2>
+              <h1>
+                {currentTest.testName || ""}
+                <Button
+                  variant="outlined"
+                  style={{ backgroundColor: "white", float: "right" }}
+                  onClick={handleSubmitTest}
+                >
+                  Nộp bài
+                </Button>
+              </h1>
               <div className="test-form-content">
                 {currentTest.sections.map((sec, key) => (
                   <Section
                     section={sec}
                     key={key}
-                    handleAnswerQs={(idQs, value) => {
-                      handleAnswerQs(idQs, value);
+                    testResult={testResult[key]}
+                    handleAnswerQs={(questionId, value) => {
+                      handleAnswerQs(key, questionId, value);
                     }}
                   />
                 ))}
@@ -90,13 +117,14 @@ const data = {
   sections: [
     {
       sectionName: "Phần thi 1",
+      id: 1,
       questionSections: [
         {
           question: {
             id: "10001",
             contentText: "Thủ đô vn là?",
             type: 1,
-            contentJSON: [
+            contentListObject: [
               {
                 key: "Hà tĩnh",
                 value: false,
@@ -113,7 +141,7 @@ const data = {
             id: "10002",
             contentText: "Tỉnh của vn là?",
             type: 2,
-            contentJSON: [
+            contentListObject: [
               {
                 key: "Hà tĩnh",
                 value: true,
@@ -129,13 +157,14 @@ const data = {
     },
     {
       sectionName: "Phần thi 2",
+      id: 2,
       questionSections: [
         {
           question: {
             id: "10003",
             contentText: "Thủ đô tq là?",
             type: 1,
-            contentJSON: [
+            contentListObject: [
               {
                 key: "Hà tĩnh",
                 value: false,
@@ -152,84 +181,6 @@ const data = {
             id: "10004",
             contentText: "Tên bạn là gì?",
             type: 3,
-          },
-        },
-      ],
-    },
-    {
-      sectionName: "Phần thi 1",
-      questionSections: [
-        {
-          question: {
-            id: "10001",
-            contentText: "Thủ đô vn là?",
-            type: 1,
-            contentJSON: [
-              {
-                key: "Hà tĩnh",
-                value: false,
-              },
-              {
-                key: "Hà Nội",
-                value: true,
-              },
-            ],
-          },
-        },
-        {
-          question: {
-            id: "10002",
-            contentText: "Tỉnh của vn là?",
-            type: 2,
-            contentJSON: [
-              {
-                key: "Hà tĩnh",
-                value: true,
-              },
-              {
-                key: "Hà Nội",
-                value: true,
-              },
-            ],
-          },
-        },
-      ],
-    },
-    {
-      sectionName: "Phần thi 1",
-      questionSections: [
-        {
-          question: {
-            id: "10001",
-            contentText: "Thủ đô vn là?",
-            type: 1,
-            contentJSON: [
-              {
-                key: "Hà tĩnh",
-                value: false,
-              },
-              {
-                key: "Hà Nội",
-                value: true,
-              },
-            ],
-          },
-        },
-        {
-          question: {
-            id: "10002",
-            contentText: "Tỉnh của vn là?",
-            type: 2,
-            contentJSON: [
-              {
-                key: "Hà tĩnh",
-                value: true,
-              },
-              {
-                key: "Hà Nội",
-                value: true,
-              },
-            ],
           },
         },
       ],

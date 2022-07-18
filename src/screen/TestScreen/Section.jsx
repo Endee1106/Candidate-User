@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 
-const Section = ({ section, handleAnswerQs }) => {
+const Section = ({ section, handleAnswerQs, testResult }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="section">
@@ -31,16 +31,16 @@ const Section = ({ section, handleAnswerQs }) => {
                 <span style={{ marginRight: "12px" }}>{key + 1}:</span>
                 {qst.question.contentText}
               </h4>
-              <p>
+              <div>
                 {qst.question.type === 1 && (
                   <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
                     name={qst.question.id}
                     onChange={(e) => {
-                      handleAnswerQs(qst.question.id, e.target.value);
+                      handleAnswerQs(key, e.target.value);
                     }}
                   >
-                    {qst.question?.contentJSON?.map((content, k) => (
+                    {qst.question?.contentListObject?.map((content, k) => (
                       <FormControlLabel
                         key={k}
                         value={content.key}
@@ -50,6 +50,35 @@ const Section = ({ section, handleAnswerQs }) => {
                     ))}
                   </RadioGroup>
                 )}
+                {qst.question.type === 2 && (
+                  <FormGroup>
+                    {qst.question?.contentListObject?.map((content, k) => (
+                      <FormControlLabel
+                        key={k}
+                        value={content.key}
+                        control={
+                          <Checkbox
+                            onChange={(e) => {
+                              let currentValue =
+                                testResult.questionSections[key].answerText ||
+                                [];
+                              let newValue = [];
+                              if (e.target.checked) {
+                                newValue = [...currentValue, e.target.value];
+                              } else {
+                                newValue = currentValue.filter(
+                                  (item) => item !== e.target.value
+                                );
+                              }
+                              handleAnswerQs(key, newValue);
+                            }}
+                          />
+                        }
+                        label={content.key}
+                      />
+                    ))}
+                  </FormGroup>
+                )}
                 {qst.question.type === 3 && (
                   <FormGroup>
                     <FormControlLabel
@@ -57,13 +86,14 @@ const Section = ({ section, handleAnswerQs }) => {
                         <TextareaAutosize
                           minRows={5}
                           onChange={(e) => {
-                            handleAnswerQs(qst.question.id, e.target.value);
+                            handleAnswerQs(key, e.target.value);
                           }}
                           style={{
                             width: "100%",
                             textIndent: "15px",
                             padding: "12px 0",
                             textSizeAdjust: "18px",
+                            marginLeft: "15px",
                           }}
                         />
                       }
@@ -71,7 +101,7 @@ const Section = ({ section, handleAnswerQs }) => {
                     />
                   </FormGroup>
                 )}
-              </p>
+              </div>
             </div>
           ))}
         </div>
