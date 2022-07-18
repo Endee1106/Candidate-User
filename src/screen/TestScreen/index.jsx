@@ -19,14 +19,47 @@ const TestScreen = (props) => {
     });
   }, []);
 
-  const handleAnswerQs = (sectionIndex, questionIndex, value) => {
+  const handleAnswerQs = (sectionIndex, questionIndex, value, type) => {
     try {
       let ts = [...testResult];
-      ts[sectionIndex].questionSections[questionIndex].answerText = value;
+      if (type === 3)
+        ts[sectionIndex].questionSections[questionIndex].answerText = value;
+      else {
+        const contentListObject =
+          ts[sectionIndex].questionSections[questionIndex].question
+            .contentListObject;
+        ts[sectionIndex].questionSections[
+          questionIndex
+        ].question.contentListObject = convertValue(
+          contentListObject,
+          value.key,
+          value.value,
+          type
+        );
+      }
       setTestResult(ts);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const convertValue = (contentListObject, key, value, type) => {
+    return contentListObject.map((item) => {
+      if (item.key === key) {
+        return {
+          key: item.key,
+          value: value,
+        };
+      } else {
+        if (type === 1) {
+          const newItem = item;
+          newItem.value = false;
+          return newItem;
+        } else {
+          return item;
+        }
+      }
+    });
   };
 
   const handleSubmitTest = async () => {
@@ -35,6 +68,7 @@ const TestScreen = (props) => {
       const userID = JSON.parse(sessionStorage.getItem("info"))?.id || "";
       const answer = {
         accountId: userID,
+        testCode: searchParams.get("testCode"),
         testAnswer: {
           id: currentTest.id,
           sections: testResult,

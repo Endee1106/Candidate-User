@@ -37,7 +37,11 @@ const Section = ({ section, handleAnswerQs, testResult }) => {
                     aria-labelledby="demo-radio-buttons-group-label"
                     name={qst.question.id}
                     onChange={(e) => {
-                      handleAnswerQs(key, e.target.value);
+                      handleAnswerQs(
+                        key,
+                        { key: e.target.value, value: e.target.checked },
+                        qst.question.type
+                      );
                     }}
                   >
                     {qst.question?.contentListObject?.map((content, k) => (
@@ -59,18 +63,14 @@ const Section = ({ section, handleAnswerQs, testResult }) => {
                         control={
                           <Checkbox
                             onChange={(e) => {
-                              let currentValue =
-                                testResult.questionSections[key].answerText ||
-                                [];
-                              let newValue = [];
-                              if (e.target.checked) {
-                                newValue = [...currentValue, e.target.value];
-                              } else {
-                                newValue = currentValue.filter(
-                                  (item) => item !== e.target.value
-                                );
-                              }
-                              handleAnswerQs(key, newValue);
+                              handleAnswerQs(
+                                key,
+                                {
+                                  key: e.target.value,
+                                  value: e.target.checked,
+                                },
+                                qst.question.type
+                              );
                             }}
                           />
                         }
@@ -86,7 +86,11 @@ const Section = ({ section, handleAnswerQs, testResult }) => {
                         <TextareaAutosize
                           minRows={5}
                           onChange={(e) => {
-                            handleAnswerQs(key, e.target.value);
+                            handleAnswerQs(
+                              key,
+                              e.target.value,
+                              qst.question.type
+                            );
                           }}
                           style={{
                             width: "100%",

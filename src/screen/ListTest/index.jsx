@@ -64,7 +64,11 @@ const ListTest = () => {
           <ul>
             {lsTest.map((test, key) => (
               <li key={key}>
-                <Link to={`/client/test?id=${test.id}`}>{test.testName}</Link>
+                <Link
+                  to={`/client/test?id=${test.id}&testCode=${test.testCode}`}
+                >
+                  {test.testName}
+                </Link>
               </li>
             ))}
           </ul>
