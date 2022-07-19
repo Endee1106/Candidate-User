@@ -130,11 +130,11 @@ const TestScreen = (props) => {
         className="card row"
         style={{
           margin: "12px 24px",
-          minHeight: "600px",
+          height: "680px",
           overflow: "scroll",
         }}
       >
-        <div className="card test-form" style={{ width: "100%" }}>
+        <div className="test-form" style={{ width: "100%" }}>
           {isLoading ? (
             <div className="center" style={{ height: "100%" }}>
               <CircularProgress/>

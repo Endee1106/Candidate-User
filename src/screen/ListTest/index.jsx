@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import TestClientApi from "../../api/entities/TestClientApi";
+import VerifyPopup from "./VerifyPopup";
 // import "./ListTest.css";
 
 const ListTest = () => {
@@ -9,6 +10,8 @@ const ListTest = () => {
   const [currentTest, setCurrentTest] = useState({});
   const [testResult, setTestResult] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [data, setData] = useState({});
 
   useEffect(() => {
     TestClientApi.getTests.then((rs) => {
@@ -16,42 +19,16 @@ const ListTest = () => {
     });
   }, []);
 
-  const handleAnswerQs = (sectionIndex, questionIndex, value) => {
-    try {
-      let ts = [...testResult];
-      ts[sectionIndex].questionSections[questionIndex].answerText = value;
-      setTestResult(ts);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleSubmitTest = async () => {
-    try {
-      setIsLoading(true);
-      const userID = JSON.parse(sessionStorage.getItem("info"))?.id || "";
-      const answer = {
-        accountId: userID,
-        testAnswer: {
-          id: currentTest.id,
-          sections: testResult,
-        },
-      };
-      let rs = await TestClientApi.submitTest(answer);
-      if (rs.status !== 200) {
-        window.alert("Something wrong");
-      } else {
-        window.alert("Gửi bài thi thành công");
-      }
-      setIsLoading(true);
-    } catch (error) {
-      window.alert("Something wrong");
-      console.log(error);
-    }
-  };
-
   return (
     <div>
+      <VerifyPopup
+        open={isOpen}
+        handleClose={() => {
+          setIsOpen(false);
+        }}
+        link={data.link}
+        testName={data.testName}
+      />
       <div
         className="card row"
         style={{
@@ -63,12 +40,17 @@ const ListTest = () => {
           <h2>Danh sách bài thi</h2>
           <ul>
             {lsTest.map((test, key) => (
-              <li key={key}>
-                <Link
-                  to={`/client/test?id=${test.id}&testCode=${test.testCode}`}
-                >
-                  {test.testName}
-                </Link>
+              <li
+                key={key}
+                onClick={() => {
+                  setIsOpen(true);
+                  setData({
+                    link: `/client/test?id=${test.id}&testCode=${test.testCode}`,
+                    testName: test.testName,
+                  });
+                }}
+              >
+                {test.testName}
               </li>
             ))}
           </ul>
