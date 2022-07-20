@@ -13,7 +13,7 @@ function Menu() {
       text: "Trang chủ",
     },
     {
-      to: "/client/test",
+      to: "/client/listtest",
       icon: "test",
       text: "Bài thi",
     },
