@@ -1,0 +1,96 @@
+.content {
+    background-color: #DBE2EF;
+    display: flex;
+    flex-direction: row;
+}
+.left-home {
+    width: 20%;
+    height: 93%;
+    border-radius: 24px;
+    margin-left : 30px;
+    margin-top: 30px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    background-image: url("https://img.freepik.com/free-photo/marble-product-background_53876-92994.jpg?size=338&ext=jpg&uid=R75327898");
+}
+.left-home h2 {
+    text-align: center;
+    
+}
+.left-home li {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+    list-style-type: number; 
+    line-height: 50px;   
+    
+}
+.home {
+    margin-top: 30px;
+    margin-left: 30px;
+    border-radius: 24px;
+    width: 75%;
+    height: 93%;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.home-img {
+    height: 581px;
+    width: 100%;
+   
+}
+img {
+    max-height: 100%;
+    width: 100%;
+    border-radius: 24px;
+}
+.home-content {
+    height: 350px;
+    width: 85%;
+    position: relative;
+    bottom: 150px;
+    left: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+
+}
+.content1 {
+    width: 30%;
+    border-radius: 24px;
+    background-image: url("https://img.freepik.com/free-photo/table-top-with-background_1404-29.jpg?size=626&ext=jpg&uid=R75327898");
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+.content2 {
+    width: 30%;
+    border-radius: 24px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    background-image: url("https://img.freepik.com/free-photo/beautiful-shot-optical-glasses-cup-table-with-white-background-space-text_181624-1570.jpg?size=626&ext=jpg&uid=R75327898");
+}
+.content3 {
+    width: 30%; 
+    border-radius: 24px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    background-image: url("https://img.freepik.com/free-photo/creative-flat-lay-design-workspace-desk-with-laptop-alarm-clock-blank-notebook-smartphone-stationery-with-copy-space-background_1150-45600.jpg?size=626&ext=jpg&uid=R75327898");
+}
+.home-content h2 {
+    text-align: center;
+    color: #112D4E;
+}
+.home-content p {
+    color: #112D4E;
+     font-size: 16px; 
+     line-height: 24px;
+     text-align: justify; 
+     text-justify: inter-word;
+     margin-left: 10px;
+     margin-right: 10px;
+}
+.home-content li {
+    color: #112D4E;
+     font-size: 16px; 
+     line-height: 24px;
+     text-align: justify; 
+     text-justify: inter-word;
+     margin-left: 10px;
+     margin-right: 10px;
+}
