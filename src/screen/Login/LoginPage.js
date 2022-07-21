@@ -52,6 +52,7 @@ function LoginPage() {
               value={inputs.username || ""}
               onChange={handleChange}
               placeholder="Username" 
+              style={{paddingLeft: 10}}
             />
             {/* <label htmlFor="username">Username</label> */}
             <span className="focus-border"></span>
@@ -65,6 +66,7 @@ function LoginPage() {
               value={inputs.password || ""}
               onChange={handleChange}
               placeholder="Password" 
+              style={{paddingLeft: 10}}
             />
             {/* <label htmlFor="password">Password</label> */}
             <span className="focus-border"></span>

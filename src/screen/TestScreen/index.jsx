@@ -7,6 +7,7 @@ import { useSearchParams } from "react-router-dom";
 import cleanDeep from "clean-deep";
 import CircularProgress from "@mui/material/CircularProgress";
 import ModalResult from "./ModalResult";
+import { toast } from 'react-toastify';
 
 const TestScreen = (props) => {
   const [lsTest, setLsTest] = useState([]);
@@ -29,8 +30,11 @@ const TestScreen = (props) => {
   const handleAnswerQs = (sectionIndex, questionIndex, value, type) => {
     try {
       let ts = [...testResult];
-      if (type === 3)
-        ts[sectionIndex].questionSections[questionIndex].answerText = value;
+      console.log(type);
+      if (type === 3) {
+        console.log(value);
+        ts[sectionIndex].questionSections[questionIndex].question.answerText = value;
+      }
       else {
         const contentListObject =
           ts[sectionIndex].questionSections[questionIndex].question
@@ -101,18 +105,23 @@ const TestScreen = (props) => {
       };
       let _answer = cleanDeep(answer);
 
+      console.log(JSON.stringify(_answer, null, 2));
+
       let rs = await TestClientApi.submitTest(_answer);
-      if (rs.data.code !== 2001) {
-        window.alert("Something wrong");
-      } else {
+      if (rs.data.code == 2001 || rs.data.code == 2000) {
         setIsOpen(true);
         setData(rs.data.data);
-        window.alert("Gửi bài thi thành công");
+        if (rs.data.code == 2001)
+          toast.success("Gửi bài thi thành công");
+        else
+          toast.info("Đây là lần thi lại nên bài thi sẽ không được lưu lại!");
+      } else {
+        toast.error("Something wrong");
       }
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-      window.alert("Something wrong");
+      toast.error("Something wrong");
       console.log(error);
     }
   };
@@ -137,7 +146,7 @@ const TestScreen = (props) => {
         <div className="test-form" style={{ width: "100%" }}>
           {isLoading ? (
             <div className="center" style={{ height: "100%" }}>
-              <CircularProgress/>
+              <CircularProgress />
             </div>
           ) : (
             currentTest.id && (
@@ -158,8 +167,8 @@ const TestScreen = (props) => {
                       section={sec}
                       key={key}
                       testResult={testResult[key]}
-                      handleAnswerQs={(questionId, value) => {
-                        handleAnswerQs(key, questionId, value);
+                      handleAnswerQs={(questionId, value, type) => {
+                        handleAnswerQs(key, questionId, value, type);
                       }}
                     />
                   ))}
@@ -174,3 +183,4 @@ const TestScreen = (props) => {
 };
 
 export default TestScreen;
+

@@ -2,6 +2,7 @@
     background-color: #DBE2EF;
     display: flex;
     flex-direction: row;
+    overflow-y: auto;
 }
 .left-home {
     width: 20%;

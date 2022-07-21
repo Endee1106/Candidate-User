@@ -36,7 +36,7 @@ const ListTest = () => {
           minHeight: "500px",
         }}
       >
-        <div className="list-test card" style={{ padding: 0 }}>
+        <div className="list-test card" style={{ padding: 10, width: '96%', marginLeft: 25 }}>
           <h2>Danh sách bài thi</h2>
           <ul>
             {lsTest.map((test, key) => (
@@ -50,7 +50,12 @@ const ListTest = () => {
                   });
                 }}
               >
-                {test.testName}
+                <span style={{width: 200}}>
+                  {test.testCode}
+                </span>
+                <span>
+                  {test.testName}
+                </span>
               </li>
             ))}
           </ul>

@@ -24,7 +24,13 @@ TestClientApi.getTest = (testId) => {
 TestClientApi.submitTest = (body) => {
   return BaseAPIConfig.post(
     "/api/testresult",
-    body
+    body,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: sessionStorage.getItem("token"),
+      },
+    }
   );
 };
 
