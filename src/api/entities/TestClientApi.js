@@ -3,7 +3,7 @@ const TestClientApi = {};
 const userID = JSON.parse(sessionStorage.getItem("info"))?.id || "";
 
 TestClientApi.getTests = BaseAPIConfig.get(
-  "/api/test/getTestsAssignToMe?myId=" + userID,
+  "/api/test/getTestsAssignToMe",
   {
     headers: {
       "Content-Type": "application/json",
